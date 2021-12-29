@@ -28,7 +28,7 @@ const removeContact = async (req, res, next) => {
   res.status(404).json({ message: "Not found" });
 };
 
-const udateContact = async (req, res, next) => {
+const updateContact = async (req, res, next) => {
   const { id } = req.params;
   const contact = await model.updateContact(id, req.body);
   if (contact) {
@@ -42,5 +42,5 @@ export {
   getContactsById,
   addContact,
   removeContact,
-  udateContact,
+  updateContact,
 };

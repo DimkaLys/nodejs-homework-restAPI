@@ -1,12 +1,10 @@
-import Joi from "joi";
+import mongoose from "mongoose";
 
-const idSchema = Joi.object({ id: Joi.string().required() });
+const { Types } = mongoose;
 
 export const validateId = async (req, res, next) => {
-  try {
-    const value = await idSchema.validateAsync(req.params);
-  } catch (err) {
-    return res.status(400).json({ message: err.message });
+  if (!Types.ObjectId.isValid(req.params.id)) {
+    return res.status(400).json({ message: "Invalid ObjectId" });
   }
   next();
 };

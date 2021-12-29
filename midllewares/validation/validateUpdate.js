@@ -4,11 +4,12 @@ const updateSchema = Joi.object({
   name: Joi.string().optional(),
   email: Joi.string().email().optional(),
   phone: Joi.string().optional(),
+  favorite: Joi.bool().optional(),
 }).or("name", "email", "phone");
 
 export const validateUpdate = async (req, res, next) => {
   try {
-    const value = await updateSchema.validateAsync(req.body);
+    await updateSchema.validateAsync(req.body);
   } catch (err) {
     const [{ type }] = err.details;
     if (type === "object unknown") {
